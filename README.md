@@ -1,4 +1,4 @@
-# react ecosystem boilerplate
+# react vite boilerplate
 
 ## Packages
 
