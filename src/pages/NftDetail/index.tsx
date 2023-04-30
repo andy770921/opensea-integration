@@ -9,13 +9,6 @@ const NftDetail: FC = () => {
   const {
     data: { imageUrl = '', collectionName = '', name = '', description = '', permalink = '' } = {},
   } = useDetailAsset({ tokenId, contractAddress });
-  // const {
-  //   imageUrl = '',
-  //   collectionName = '',
-  //   name = '',
-  //   description = '',
-  //   permalink = '',
-  // } = data ?? {};
 
   return (
     <>

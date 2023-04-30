@@ -1,4 +1,4 @@
-import { useState, createContext, FC, useContext, ReactNode } from 'react';
+import { useState, createContext, FC, useContext, useCallback, useMemo, ReactNode } from 'react';
 
 type Address = string;
 
@@ -14,15 +14,18 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [address, setAddress] = useState<Address | null>(null);
   const isLogin = address !== null;
-  const login = (newAddress: Address) => {
+  const login = useCallback((newAddress: Address) => {
     setAddress(newAddress);
-  };
+  }, []);
 
-  const logout = () => {
+  const logout = useCallback(() => {
     setAddress(null);
-  };
+  }, []);
 
-  const value = { address, isLogin, login, logout };
+  const value = useMemo(
+    () => ({ address, isLogin, login, logout }),
+    [address, isLogin, login, logout],
+  );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

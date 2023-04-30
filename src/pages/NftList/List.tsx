@@ -10,11 +10,10 @@ import { useNftListInfiniteQuery } from './queries';
 const List: FC = () => {
   const { fetchNextPage, hasNextPage, isFetchingNextPage, data } = useNftListInfiniteQuery();
   const navigate = useNavigate();
-  //   list page<Link to="/nfts/123">To detail page</Link>
   const makeClickHandler = (tokenId: string, contractAddress: string) => () => {
-    console.log({ tokenId, contractAddress });
     navigate(generatePath(URL.NFT_DETAIL, { tokenId, contractAddress }));
   };
+
   return (
     <>
       <InfiniteScroll
