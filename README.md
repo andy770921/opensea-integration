@@ -1,101 +1,89 @@
-# react vite boilerplate
+# Opensea Integration
+
+## Demo Link
+
+https://opensea-integration.vercel.app/
+
+## API Ref
+
+- [Opensea API - Retrieve assets](https://docs.opensea.io/v1.0/reference/getting-assets)
+- [Opensea API - Retrieve an asset (Testnets)](https://docs.opensea.io/v1.0/reference/retrieving-a-single-asset-testnets)
 
 ## Packages
 
 - [Vite](https://vitejs.dev/guide/why.html)
+- [Axios](https://github.com/axios/axios)
+- [Chakra UI](https://chakra-ui.com/getting-started)
+- [Web3](https://web3js.readthedocs.io/en/v1.2.6/getting-started.html)
+- [React Query](https://tanstack.com/query/latest/docs/react/overview)
+- [React Router](https://reactrouter.com/en/main)
+- [React Infinite Scroller](https://github.com/danbovey/react-infinite-scroller)
+- [Path to Regexp](https://github.com/pillarjs/path-to-regexp)
 - [Eslint](https://eslint.org/)
 - [Prettier](https://prettier.io/)
 
-## Vite, ESLint and Prettier Installation Step:
-
-1. Install VSCode extension [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) and [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode).
-
-2. Install [Vite](https://vitejs.dev/guide/).
+## Folder Structure under /src
 
 ```
-npm create vite@latest
+┌──  components                # Components for general usage
+│    ├── ImageCard
+│    │    ├── ImageCard.tsx
+│    │    ├── ImageCardSkeleton.tsx
+│    │    └── index.tsx        # Root of <ImageCard /> and <ImageCardSkeleton />
+│    ├── Layout
+│    │    ├── BasicLayout.tsx
+│    │    └── index.tsx        # Root of <BasicLayout />
+│    ├── Loader.tsx            # <Loader /> for general usage
+│    └── LoginSwitch.tsx       # <LoginSwitch /> for BasicLayout or general usage
+│
+├── constants                  # Shared constants
+│    ├── endpoints.ts          # API endpoints
+│    └── urls.ts               # Page route urls
+│
+├── contexts                   # React context
+│    ├── AuthContext.tsx       # <AuthProvider /> and useAuth for auth state
+│    └── Web3Context.tsx       # <Web3Provider /> and useWeb3 for singleton web3 instance
+│
+├── interfaces                 # TypeScript shared interface
+│    └── apis.ts               # Interface for API response
+│
+├── pages                      # Page component
+│    ├── NftDetail
+│    │    ├── Content.tsx
+│    │    ├── ContentSkeleton.tsx
+│    │    ├── Navigator.tsx
+│    │    ├── index.tsx        # Root of <NftDetail />
+│    │    └── queries.ts       # API queries in NftDetail page
+│    ├── NftList
+│    │    ├── List
+│    │    │    ├── CardSkeletonList.tsx
+│    │    │    ├── EmptyList.tsx
+│    │    │    └── index.tsx
+│    │    ├── Introduction.tsx
+│    │    ├── index.tsx        # Root of <NftList />
+│    │    └── queries.ts       # API queries in NftList page
+│    └── NotFound
+│         └── index.tsx        # Root of <NotFound />
+│
+├── routes
+│    └── index.ts              # Page routes
+│
+├── services                   # Third-party library
+│    └── reactQuery            # React query for data fetching
+│         ├── config.ts
+│         ├── fetchers.ts      # defaultQueryFn / defaultMutationFn for general usage
+│         └── utils.ts
+│
+├── App.tsx                    # Root of overall layout
+├── main.tsx                   # Root of ReactDOM renderer
+├── misc.d.ts                  # Customized TypeScript utility type
+└── vite-env.d.ts              # Vite TS declaration file
 ```
 
-3. Install eslint and related packages with standard configuration used by [Create React App](https://www.npmjs.com/package/eslint-config-react-app). The purpose for all packages is listed [here](https://www.robinwieruch.de/vite-eslint/).
+## Project Environment Setup:
 
-```
-npm i -D vite-plugin-eslint eslint eslint-config-react-app
-```
-
-4. Create a `.eslintrc` file with below settings
-
-```json
-{
-  "extends": ["react-app"]
-}
-```
-
-5. Add `eslint` in `vite.config.ts` file.
-
-```ts
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import eslint from 'vite-plugin-eslint';
-
-// https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [react(), eslint()],
-});
-```
-
-6.  Install `prettier` and some relevant packages [explained here](https://prettier.io/docs/en/install.html#eslint-and-other-linters).
-
-```
-npm i -D prettier eslint-config-prettier eslint-plugin-prettier
-```
-
-7. Create `.prettierrc`.
-
-```json
-{
-  "semi": true,
-  "tabWidth": 2,
-  "printWidth": 100,
-  "singleQuote": true,
-  "trailingComma": "all",
-  "bracketSpacing": true
-}
-```
-
-8. Update `.eslintrc` content with integration of prettier.
-
-```json
-{
-  "extends": ["react-app", "prettier"],
-  "plugins": ["prettier"],
-  "rules": {
-    "prettier/prettier": ["error"]
-  }
-}
-```
-
-9. Add `package.json` npm script and test if it works as expected.
-
-```json
-{
-  "scripts": {
-    "lint": "eslint src/**/*.{js,jsx,ts,tsx,json}",
-    "format": "prettier --write src/**/*.ts{,x}"
-  }
-}
-```
-
-10. Add `.vscode/settings.json`.
-
-```json
-{
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
-  },
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.formatOnSave": true
-}
-```
+- [Vite](https://vitejs.dev/guide/) tutorial
+- More detail steps listed [here](https://github.com/andy770921/react_vite_boilerplate).
 
 ## Available Scripts
 
