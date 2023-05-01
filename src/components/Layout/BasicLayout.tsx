@@ -18,7 +18,7 @@ const BasicLayout: FC<{ children: ReactNode }> = ({ children }) => {
 
   const handleLoginError = (error: Error) => {
     toast({
-      title: `${error}`,
+      title: `${error.message}`,
       status: 'error',
     });
   };

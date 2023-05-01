@@ -1,6 +1,6 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import {
-  Link,
+  Button,
   HStack,
   IconButton,
   Show,
@@ -31,9 +31,12 @@ const LoginSwitch: FC<LoginSwitchProps> = ({
   onLoginError,
   onLogout,
 }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const web3 = useWeb3();
+
   const handleMetaMaskLogin = async () => {
     try {
+      setIsLoading(true);
       if (!web3) {
         throw new Error('Cannot detect MetaMask or other wallet');
       }
@@ -41,6 +44,8 @@ const LoginSwitch: FC<LoginSwitchProps> = ({
       onLoginSuccess(accounts[0]);
     } catch (error) {
       onLoginError(error as Error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -63,18 +68,30 @@ const LoginSwitch: FC<LoginSwitchProps> = ({
                   </Text>
                 </Tooltip>
               )}
-              <Link color="teal.600" fontSize="lg" onClick={onLogout}>
+              <Button variant="link" color="teal.600" fontSize="lg" onClick={onLogout}>
                 Logout
-              </Link>
+              </Button>
             </>
           ) : (
             <>
-              <Link color="teal.600" fontSize="lg" onClick={onFakeLogin}>
+              <Button
+                variant="link"
+                color="teal.600"
+                fontSize="lg"
+                onClick={onFakeLogin}
+                isDisabled={isLoading}
+              >
                 Demo Login
-              </Link>
-              <Link color="teal.600" fontSize="lg" onClick={handleMetaMaskLogin}>
+              </Button>
+              <Button
+                variant="link"
+                color="teal.600"
+                fontSize="lg"
+                onClick={handleMetaMaskLogin}
+                isDisabled={isLoading}
+              >
                 MetaMask Login
-              </Link>
+              </Button>
             </>
           )}
         </HStack>
