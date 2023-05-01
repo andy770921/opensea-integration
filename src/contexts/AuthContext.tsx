@@ -3,7 +3,7 @@ import { useState, createContext, FC, useContext, useCallback, useMemo, ReactNod
 type Address = string;
 
 export interface AuthContextType {
-  address: Address | null;
+  address: Nullable<Address>;
   isLogin: boolean;
   login: (user: Address) => void;
   logout: () => void;
@@ -12,7 +12,7 @@ export interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
-  const [address, setAddress] = useState<Address | null>(null);
+  const [address, setAddress] = useState<Nullable<Address>>(null);
   const isLogin = address !== null;
   const login = useCallback((newAddress: Address) => {
     setAddress(newAddress);
@@ -32,7 +32,7 @@ const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
 const useAuth = () => {
   const context = useContext(AuthContext);
-  if (!context) {
+  if (context === undefined) {
     throw new Error('useAuth must be used within a AuthProvider');
   }
   return context;

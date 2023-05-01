@@ -10,7 +10,7 @@ interface ImageCardProps {
 
 const ImageCard: FC<ImageCardProps> = ({ src, title, description, onClick }) => (
   <Card
-    w={['45%', '300px']}
+    w={['40%', '300px']}
     cursor="pointer"
     _hover={{
       background: 'yellow.100',
