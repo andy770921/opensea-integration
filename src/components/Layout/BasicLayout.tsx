@@ -7,17 +7,17 @@ const BasicLayout: FC<{ children: ReactNode }> = ({ children }) => {
 
   return (
     <>
-      <Container maxW="1200px" mt="24px" centerContent>
-        <Flex w="100%" pr="40px" justifyContent="flex-end" columnGap="20px">
+      <Container maxW="1200px" mt="24px" position="relative" centerContent>
+        <Flex justifyContent="flex-end" columnGap="20px" position="absolute" right="40px">
           {isLogin ? (
             <>
               <Tooltip label={address}>
                 <Text
+                  display={['none', 'none', 'block']}
                   fontSize="lg"
                   noOfLines={1}
-                  maxWidth="200px"
+                  maxWidth={['0px', null, '100px', '200px']}
                   whiteSpace="nowrap"
-                  display="block"
                 >
                   Hi, {address}
                 </Text>
